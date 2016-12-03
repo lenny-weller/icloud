@@ -53,8 +53,8 @@
         $scope.colors = ["c1 sel", "c2", "c3", "c4", "c5", "c6", "c7"];
         $scope.lists = [{
             class: "c1", id: 1, title: "新列表", bg: "s1",
-            todos: [{id: 1, title: "a", state: 0}, {id: 2, title: "b", state: 0}, {id: 3, title: "c", state: 1}, {
-                id: 4, title: "d", state: 1
+            todos: [{id: 1, title: "玩", state: 0}, {id: 2, title: "学", state: 0}, {id: 3, title: "睡", state: 1}, {
+                id: 4, title: "吃", state: 1
             }]
         },
             {class: "c2", bg: "s2", id: 2, title: "新列表2", todos: []}, {
