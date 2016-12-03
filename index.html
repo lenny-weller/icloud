@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" ng-app="reminder">
+<head>
+    <meta charset="UTF-8">
+    <title>提醒事项</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/index.js"></script>
+</head>
+<body ng-controller="mainCtrl">
+<div class="reminder sc-view">
+    <div class="left sc-view">
+        <div class="left-top">
+            <div class="switcher">
+                <div class="icloud">
+                    <label>提醒事项</label>
+                    <div class="icloud-text"></div>
+                    <div class="icon">
+
+                    </div>
+                </div>
+            </div>
+            <div class="btn" ng-click="add()">
+                <div class="img"></div>
+            </div>
+        </div>
+        <div class="left-content">
+            <div class="plan item">
+                <div class="plan-content">
+                    <div class="plan-icon"></div>
+                    <label for="">已计划</label>
+                </div>
+                <div class="line"></div>
+            </div>
+            <div class="lists">
+                <color-li ng-repeat="v in lists"></color-li>
+            </div>
+        </div>
+    </div>
+    <div class="right sc-view">
+        <div class="search-box">
+            <div class="search">
+                <div class="padding">
+                    <input type="text" class="white" ng-focus="white()" ng-moude="word" placeholder="搜索所有提醒">
+                </div>
+                <div class="clean">
+                    <div class="search-icon"></div>
+                </div>
+            </div>
+            <div class="menu">
+                <div class="name">
+                    <label for="">王某某</label>
+                    <div class="icon"></div>
+                </div>
+                <div class="text"></div>
+                <div class="help">
+                    <div class="img"></div>
+                </div>
+            </div>
+        </div>
+        <div class="right-content">
+            <div class="list-top">
+                <div class="title {{current.class}}">{{current.title}}</div>
+                <div class="button" ng-click="show($event)">
+                    <label for="" class="{{current.class}}">选项</label>
+                </div>
+            </div>
+            <div class="list-content">
+                <div class="divider"></div>
+                <div class="divider1"></div>
+                <div class="content">
+                    <div class="finish">
+                        <div class="label-container">已完成：<span>{{change()}}</span> 项</div>
+                        <div class="button" ng-click="none()">
+                            <div class="img to-right"></div>
+                        </div>
+                        <div class="clear" ng-click="delete(v.id)">
+                            <label for="" class="{{current.class}}">清除已完成事项</label>
+                        </div>
+                    </div>
+                    <div class="collection">
+                        <div class="view v1" ng-repeat="v in current.todos|filter:{state:1}">
+                            <div class="background"></div>
+                            <div class="top {{current.class}}"></div>
+                            <div class="bottom {{current.class}}"></div>
+                            <div class="divider-bo"></div>
+                            <div class="lines">
+                                <a href="javascript:;" ng-click="v.state=0">
+                                    <div class="checked {{current.class}}"></div>
+                                </a>
+                                <input type="text" ng-model="v.title" ng-focus="line($index)" ng-blur="uline($index)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kong"></div>
+                    <div class="new">
+                        <div class="view v1 new2" ng-repeat="v in current.todos|filter:{state:0}">
+                            <div class="background"></div>
+                            <div class="top {{current.class}}"></div>
+                            <div class="bottom {{current.class}}"></div>
+                            <div class="divider-bo"></div>
+                            <div class="lines">
+                                <a href="javascript:;" ng-click="v.state=1">
+                                    <div class="unchecked {{current.class}}"></div>
+                                </a>
+                                <input type="text" ng-model="v.title" ng-focus="line1($index)" ng-blur="uline1($index)">
+                            </div>
+                        </div>
+                        <div class="view v1 new-todo" ng-click="bg()">
+                            <div class="background {{current.class}}"></div>
+                            <div class="top {{current.class}}"></div>
+                            <div class="bottom {{current.class}}"></div>
+                            <div class="lines">
+                                <a href="javascript:;">
+                                    <div class="unchecked"></div>
+                                </a>
+                                <input type="text" ng-model="v.title">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="new-list" ng-click="new()">
+                        <label for="">新项目...</label>
+                        <div class="divider-bo"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fixed" ng-click="stop($event)">
+    <div class="content">
+        <div class="text">
+            <div class="border"></div>
+            <div class="padding">
+                <div class="hint"></div>
+                <input type="text" ng-model="current.title">
+            </div>
+        </div>
+        <div class="list-color">列表颜色</div>
+        <div class="colors">
+            <color-div ng-repeat="v in colors"></color-div>
+        </div>
+        <div class="btns">
+            <div class="lefts">
+                <div class="button" ng-click="miss(current.id)">
+                    <label for="">删除</label>
+                </div>
+            </div>
+            <div class="rights">
+                <span class="button" ng-click="nn()">
+                    <label for="">取消</label>
+                </span>
+                <span class="l">
+                    <span></span>
+                </span>
+                <span class="fin" ng-click="nn()">
+                    <label for="">完成</label>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+    <span class="unline">
+        <span></span>
+    </span>
+</div>
+<div class="cover"></div>
+<div class="alert">
+    <div class="alert-content">
+        <div class="dele">是否清除所有已完成提醒</div>
+        <div class="delete">
+            <a href="javascript:;" class="no" ng-click="no()"><span>取消</span></a>
+            <a href="javascript:;" class="yes" ng-click="yes()"><span>清除已完成事项</span></a>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
